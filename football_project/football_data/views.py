@@ -3,10 +3,12 @@ from django.shortcuts import render
 # Create your views here.
 
 from rest_framework import generics, permissions
+from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Team
 from .models import Match
-from .serializers import TeamSerializer,  MatchSerializer
+from .serializers import TeamSerializer,  MatchSerializer, CustomTokenObtainPairSerializer
 from .permissions import IsAdminUser, IsAnalystUser, IsGuestUser
+
 
 
 # Lista todos los equipos
@@ -82,3 +84,7 @@ class TeamListGuestView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated, IsGuestUser]
 
 
+#VISTA PERSONALIZADA ACCESO LOGIN
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
