@@ -4,7 +4,8 @@ from django.shortcuts import render
 
 from rest_framework import generics, permissions
 from .models import Team
-from .serializers import TeamSerializer
+from .models import Match
+from .serializers import TeamSerializer,  MatchSerializer
 from .permissions import IsAdminUser
 
 # Lista todos los equipos
@@ -30,5 +31,34 @@ class TeamUpdateView(generics.RetrieveUpdateAPIView):
 class TeamDeleteView(generics.DestroyAPIView):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminUser]
+    lookup_field = 'id'
+
+
+
+
+# Listar todos los partidos
+class MatchListView(generics.ListAPIView):
+    queryset = Match.objects.all()
+    serializer_class = MatchSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+# Crear partido
+class MatchCreateView(generics.CreateAPIView):
+    queryset = Match.objects.all()
+    serializer_class = MatchSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminUser]
+
+# Actualizar partido
+class MatchUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = Match.objects.all()
+    serializer_class = MatchSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAdminUser]
+    lookup_field = 'id'
+
+# Eliminar partido
+class MatchDeleteView(generics.DestroyAPIView):
+    queryset = Match.objects.all()
+    serializer_class = MatchSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdminUser]
     lookup_field = 'id'
