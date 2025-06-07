@@ -6,7 +6,8 @@ from rest_framework import generics, permissions
 from .models import Team
 from .models import Match
 from .serializers import TeamSerializer,  MatchSerializer
-from .permissions import IsAdminUser
+from .permissions import IsAdminUser, IsAnalystUser, IsGuestUser
+
 
 # Lista todos los equipos
 class TeamListView(generics.ListAPIView):
@@ -62,3 +63,22 @@ class MatchDeleteView(generics.DestroyAPIView):
     serializer_class = MatchSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdminUser]
     lookup_field = 'id'
+
+
+
+#Restriccion para que analistas puedan ver el los partidos
+
+class MatchListAnalystView(generics.ListAPIView):
+    queryset = Match.objects.all()
+    serializer_class = MatchSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAnalystUser]
+
+
+#Invitado que vea solo los equipos
+
+class TeamListGuestView(generics.ListAPIView):
+    queryset = Team.objects.all()
+    serializer_class = TeamSerializer
+    permission_classes = [permissions.IsAuthenticated, IsGuestUser]
+
+
