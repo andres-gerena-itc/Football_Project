@@ -7,31 +7,29 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/login" element={<Login />} />
+    <Routes>
+      <Route path="/login" element={<Login />} />
 
-        <Route path="/dashboard" element={
-          <ProtectedRoute allowedRoles={["admin", "analista", "invitado"]}>
-            <Dashboard />
-          </ProtectedRoute>
-        }/>
+      <Route path="/dashboard" element={
+        <ProtectedRoute allowedRoles={["admin", "analista", "invitado"]}>
+          <Dashboard />
+        </ProtectedRoute>
+      }/>
 
-        <Route path="/teams" element={
-          <ProtectedRoute allowedRoles={["admin"]}>
-            <TeamCrud />
-          </ProtectedRoute>
-        }/>
+      <Route path="/teams" element={
+        <ProtectedRoute allowedRoles={["admin", "analista"]}>
+          <TeamCrud />
+        </ProtectedRoute>
+      }/>
 
-        <Route path="/matches" element={
-          <ProtectedRoute allowedRoles={["admin", "analista"]}>
-            <MatchCrud />
-          </ProtectedRoute>
-        }/>
+      <Route path="/matches" element={
+        <ProtectedRoute allowedRoles={["admin", "analista"]}>
+          <MatchCrud />
+        </ProtectedRoute>
+      }/>
 
-        <Route path="/not-authorized" element={<h1>403 - No autorizado</h1>} />
-      </Routes>
-    </div>
+      <Route path="/not-authorized" element={<h1>403 - No autorizado</h1>} />
+    </Routes>
   );
 }
 

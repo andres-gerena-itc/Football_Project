@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import "./Login.css"; // Aplicacion de estilos
+import "./Login.css";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -22,12 +22,18 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
+        // ✅ El token se decodifica, pero los grupos vienen fuera
         const decoded = jwtDecode(data.access);
-        const groups = decoded.groups || [];
+        console.log("✅ Token decodificado:", decoded);
 
-        // Guardar token y rol
+        const groups = data.groups || [];
+        console.log("✅ Groups en token:", groups);
+
+        // Guardar token y rol en localStorage
         localStorage.setItem("access_token", data.access);
         localStorage.setItem("user_role", groups[0] || "");
+
+        console.log("✅ Rol guardado:", groups[0] || "");
 
         // Redirigir
         navigate("/dashboard");
@@ -35,6 +41,7 @@ function Login() {
         setError("Credenciales inválidas");
       }
     } catch (err) {
+      console.error("❌ Error al conectar:", err);
       setError("Error al conectar con el servidor");
     }
   };

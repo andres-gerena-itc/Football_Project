@@ -21,10 +21,5 @@ class MatchSerializer(serializers.ModelSerializer):
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-
-        # Añadir grupo al payload
-        user = self.user
-        groups = list(user.groups.values_list('name', flat=True))
-        data['groups'] = groups
-
+        data["groups"] = [group.name for group in self.user.groups.all()]
         return data

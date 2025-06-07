@@ -1,0 +1,28 @@
+.header {
+    background-color: #1c1c1c;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav button {
+    margin-right: 1rem;
+    background-color: #292929;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  button:hover {
+    background-color: #444;
+  }
+  
