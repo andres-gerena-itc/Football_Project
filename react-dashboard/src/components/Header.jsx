@@ -1,7 +1,8 @@
+// src/components/Header.jsx
 import { useNavigate } from "react-router-dom";
-import "./Header.css"; // si quieres agregar estilos opcionales
+import "./Header.css";
 
-function Header() {
+export default function Header() {
   const navigate = useNavigate();
   const role = localStorage.getItem("user_role");
 
@@ -13,9 +14,11 @@ function Header() {
 
   return (
     <header className="header">
-      <h1>Champions Dashboard</h1>
+      <div className="logo" onClick={() => navigate("/dashboard")}>
+        Champions Dashboard
+      </div>
 
-      <nav>
+      <nav className="nav-links">
         <button onClick={() => navigate("/dashboard")}>Dashboard</button>
 
         {(role === "admin" || role === "analista") && (
@@ -27,12 +30,12 @@ function Header() {
         )}
       </nav>
 
-      <div className="user-info">
-        <span>👤 Rol: <strong>{role}</strong></span>
-        <button onClick={handleLogout}>Cerrar sesión</button>
+      <div className="user-actions">
+        <span className="role-badge">👤 Rol: <strong>{role}</strong></span>
+        <button className="logout-btn" onClick={handleLogout}>
+          Cerrar sesión
+        </button>
       </div>
     </header>
   );
 }
-
-export default Header;

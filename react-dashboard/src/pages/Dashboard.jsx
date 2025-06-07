@@ -17,7 +17,7 @@ function Dashboard() {
   return (
     <div>
       <Header />
-      <main style={{ padding: '2rem' }}>
+      <main style={{ padding: '6rem 2rem 2rem' }}>
         <h1>Champions League KPIs</h1>
         <div style={{ marginTop: '2rem' }}>
           <h2>Total Partidos: {kpis.total_matches}</h2>
