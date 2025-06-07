@@ -4,7 +4,8 @@ from .views import (
     TeamListView, TeamCreateView,
     TeamUpdateView, TeamDeleteView,     
     MatchListView, MatchCreateView,
-    MatchUpdateView, MatchDeleteView
+    MatchUpdateView, MatchDeleteView,
+    MatchListAnalystView, TeamListGuestView
 )
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -24,4 +25,6 @@ urlpatterns = [
     path('api/matches/create/', MatchCreateView.as_view(), name='match-create'),
     path('api/matches/<int:id>/update/', MatchUpdateView.as_view(), name='match-update'),
     path('api/matches/<int:id>/delete/', MatchDeleteView.as_view(), name='match-delete'),
+    path('api/matches/analyst/', MatchListAnalystView.as_view(), name='match-list-analyst'),
+    path('api/teams/guest/', TeamListGuestView.as_view(), name='team-list-guest'),
 ]
