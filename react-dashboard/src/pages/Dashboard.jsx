@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import regresionImage from '../assets/regresion.png'; // 🔽 importa tu imagen
 import MatchTabs from "./MatchTabs";
+import MatchGraph from "../components/MatchGraph";
 
 function Dashboard() {
   const [kpis, setKpis] = useState(null);
@@ -62,6 +63,8 @@ function Dashboard() {
         </section>
 
         <MatchTabs />
+
+        <MatchGraph />
 
       </main>
     </div>
