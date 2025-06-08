@@ -88,3 +88,13 @@ class TeamListGuestView(generics.ListAPIView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
+
+
+
+
+#Generacion tabla partidos
+
+class MatchListView(generics.ListAPIView):
+    queryset = Match.objects.all().order_by('date')
+    serializer_class = MatchSerializer
