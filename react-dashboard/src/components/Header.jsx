@@ -26,7 +26,7 @@ export default function Header() {
         )}
 
         {(role === "admin" || role === "analista") && (
-          <button onClick={() => navigate("/matches")}>Partidos</button>
+          <button onClick={() => navigate("/match-tabs")}>Partidos</button>
         )}
       </nav>
 

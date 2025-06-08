@@ -1,0 +1,126 @@
+source_team,target_team,goles_local,goles_visita,resultado,stage,fecha
+AC Milan,Newcastle United FC,0,0,draw,GROUP_STAGE,2023-09-19
+RB Leipzig,BSC Young Boys,1,3,loss,GROUP_STAGE,2023-09-19
+SS Lazio,Club Atlético de Madrid,1,1,draw,GROUP_STAGE,2023-09-19
+Feyenoord Rotterdam,Celtic FC,2,0,win,GROUP_STAGE,2023-09-19
+Paris Saint-Germain FC,Borussia Dortmund,2,0,win,GROUP_STAGE,2023-09-19
+Manchester City FC,FK Crvena Zvezda,3,1,win,GROUP_STAGE,2023-09-19
+FC Barcelona,Royal Antwerp FC,5,0,win,GROUP_STAGE,2023-09-19
+FC Porto,FK Shakhtar Donetsk,1,3,loss,GROUP_STAGE,2023-09-19
+Real Madrid CF,1. FC Union Berlin,1,0,win,GROUP_STAGE,2023-09-20
+Galatasaray SK,FC København,2,2,draw,GROUP_STAGE,2023-09-20
+Sevilla FC,Racing Club de Lens,1,1,draw,GROUP_STAGE,2023-09-20
+SSC Napoli,Sporting Clube de Braga,1,2,loss,GROUP_STAGE,2023-09-20
+Real Sociedad de Fútbol,FC Internazionale Milano,1,1,draw,GROUP_STAGE,2023-09-20
+FC Red Bull Salzburg,Sport Lisboa e Benfica,0,2,loss,GROUP_STAGE,2023-09-20
+FC Bayern München,Manchester United FC,4,3,win,GROUP_STAGE,2023-09-20
+Arsenal FC,PSV,4,0,win,GROUP_STAGE,2023-09-20
+Sporting Clube de Braga,1. FC Union Berlin,2,3,loss,GROUP_STAGE,2023-10-03
+Real Sociedad de Fútbol,FC Red Bull Salzburg,0,2,loss,GROUP_STAGE,2023-10-03
+Real Madrid CF,SSC Napoli,2,3,loss,GROUP_STAGE,2023-10-03
+FC Internazionale Milano,Sport Lisboa e Benfica,1,0,win,GROUP_STAGE,2023-10-03
+FC Bayern München,FC København,1,2,loss,GROUP_STAGE,2023-10-03
+Galatasaray SK,Manchester United FC,2,3,loss,GROUP_STAGE,2023-10-03
+Racing Club de Lens,Arsenal FC,2,1,win,GROUP_STAGE,2023-10-03
+PSV,Sevilla FC,2,2,draw,GROUP_STAGE,2023-10-03
+Club Atlético de Madrid,Feyenoord Rotterdam,3,2,win,GROUP_STAGE,2023-10-04
+FK Shakhtar Donetsk,Royal Antwerp FC,2,3,loss,GROUP_STAGE,2023-10-04
+SS Lazio,Celtic FC,1,2,loss,GROUP_STAGE,2023-10-04
+Borussia Dortmund,AC Milan,0,0,draw,GROUP_STAGE,2023-10-04
+Newcastle United FC,Paris Saint-Germain FC,4,1,win,GROUP_STAGE,2023-10-04
+FK Crvena Zvezda,BSC Young Boys,2,2,draw,GROUP_STAGE,2023-10-04
+Manchester City FC,RB Leipzig,1,3,loss,GROUP_STAGE,2023-10-04
+FC Barcelona,FC Porto,0,1,loss,GROUP_STAGE,2023-10-04
+FC Internazionale Milano,FC Red Bull Salzburg,2,1,win,GROUP_STAGE,2023-10-24
+FC Bayern München,Galatasaray SK,1,3,loss,GROUP_STAGE,2023-10-24
+SSC Napoli,1. FC Union Berlin,0,1,loss,GROUP_STAGE,2023-10-24
+Real Madrid CF,Sporting Clube de Braga,1,2,loss,GROUP_STAGE,2023-10-24
+Real Sociedad de Fútbol,Sport Lisboa e Benfica,0,1,loss,GROUP_STAGE,2023-10-24
+Manchester United FC,FC København,1,0,win,GROUP_STAGE,2023-10-24
+Arsenal FC,Sevilla FC,1,2,loss,GROUP_STAGE,2023-10-24
+Racing Club de Lens,PSV,1,1,draw,GROUP_STAGE,2023-10-24
+Feyenoord Rotterdam,SS Lazio,3,1,win,GROUP_STAGE,2023-10-25
+FC Barcelona,FK Shakhtar Donetsk,2,1,win,GROUP_STAGE,2023-10-25
+Celtic FC,Club Atlético de Madrid,2,2,draw,GROUP_STAGE,2023-10-25
+Paris Saint-Germain FC,AC Milan,3,0,win,GROUP_STAGE,2023-10-25
+Borussia Dortmund,Newcastle United FC,0,1,loss,GROUP_STAGE,2023-10-25
+Manchester City FC,BSC Young Boys,1,3,loss,GROUP_STAGE,2023-10-25
+RB Leipzig,FK Crvena Zvezda,3,1,win,GROUP_STAGE,2023-10-25
+FC Porto,Royal Antwerp FC,1,4,loss,GROUP_STAGE,2023-10-25
+Borussia Dortmund,Newcastle United FC,2,0,win,GROUP_STAGE,2023-11-07
+FK Shakhtar Donetsk,FC Barcelona,1,0,win,GROUP_STAGE,2023-11-07
+Club Atlético de Madrid,Celtic FC,6,0,win,GROUP_STAGE,2023-11-07
+SS Lazio,Feyenoord Rotterdam,1,0,win,GROUP_STAGE,2023-11-07
+AC Milan,Paris Saint-Germain FC,2,1,win,GROUP_STAGE,2023-11-07
+Manchester City FC,BSC Young Boys,3,0,win,GROUP_STAGE,2023-11-07
+RB Leipzig,FK Crvena Zvezda,1,2,loss,GROUP_STAGE,2023-11-07
+FC Porto,Royal Antwerp FC,2,0,win,GROUP_STAGE,2023-11-07
+SSC Napoli,1. FC Union Berlin,1,1,draw,GROUP_STAGE,2023-11-08
+Real Sociedad de Fútbol,Sport Lisboa e Benfica,3,1,win,GROUP_STAGE,2023-11-08
+Real Madrid CF,Sporting Clube de Braga,3,0,win,GROUP_STAGE,2023-11-08
+FC Internazionale Milano,FC Red Bull Salzburg,0,1,loss,GROUP_STAGE,2023-11-08
+FC Bayern München,Galatasaray SK,2,1,win,GROUP_STAGE,2023-11-08
+FC København,Manchester United FC,4,3,win,GROUP_STAGE,2023-11-08
+Arsenal FC,Sevilla FC,2,0,win,GROUP_STAGE,2023-11-08
+PSV,Racing Club de Lens,1,0,win,GROUP_STAGE,2023-11-08
+SS Lazio,Celtic FC,2,0,win,GROUP_STAGE,2023-11-28
+FK Shakhtar Donetsk,Royal Antwerp FC,1,0,win,GROUP_STAGE,2023-11-28
+Club Atlético de Madrid,Feyenoord Rotterdam,1,3,loss,GROUP_STAGE,2023-11-28
+Borussia Dortmund,AC Milan,1,3,loss,GROUP_STAGE,2023-11-28
+Paris Saint-Germain FC,Newcastle United FC,1,1,draw,GROUP_STAGE,2023-11-28
+BSC Young Boys,FK Crvena Zvezda,2,0,win,GROUP_STAGE,2023-11-28
+Manchester City FC,RB Leipzig,3,2,win,GROUP_STAGE,2023-11-28
+FC Barcelona,FC Porto,2,1,win,GROUP_STAGE,2023-11-28
+Galatasaray SK,Manchester United FC,3,3,draw,GROUP_STAGE,2023-11-29
+PSV,Sevilla FC,2,3,loss,GROUP_STAGE,2023-11-29
+Sporting Clube de Braga,1. FC Union Berlin,1,1,draw,GROUP_STAGE,2023-11-29
+Real Madrid CF,SSC Napoli,4,2,win,GROUP_STAGE,2023-11-29
+Sport Lisboa e Benfica,FC Internazionale Milano,3,3,draw,GROUP_STAGE,2023-11-29
+Real Sociedad de Fútbol,FC Red Bull Salzburg,0,0,draw,GROUP_STAGE,2023-11-29
+FC Bayern München,FC København,0,0,draw,GROUP_STAGE,2023-11-29
+Arsenal FC,Racing Club de Lens,6,0,win,GROUP_STAGE,2023-11-29
+PSV,Arsenal FC,1,1,draw,GROUP_STAGE,2023-12-12
+Racing Club de Lens,Sevilla FC,2,1,win,GROUP_STAGE,2023-12-12
+Real Madrid CF,1. FC Union Berlin,2,3,loss,GROUP_STAGE,2023-12-12
+SSC Napoli,Sporting Clube de Braga,2,0,win,GROUP_STAGE,2023-12-12
+FC Internazionale Milano,Real Sociedad de Fútbol,0,0,draw,GROUP_STAGE,2023-12-12
+Sport Lisboa e Benfica,FC Red Bull Salzburg,1,3,loss,GROUP_STAGE,2023-12-12
+FC Bayern München,Manchester United FC,0,1,loss,GROUP_STAGE,2023-12-12
+FC København,Galatasaray SK,1,0,win,GROUP_STAGE,2023-12-12
+RB Leipzig,BSC Young Boys,2,1,win,GROUP_STAGE,2023-12-13
+Manchester City FC,FK Crvena Zvezda,2,3,loss,GROUP_STAGE,2023-12-13
+Club Atlético de Madrid,SS Lazio,2,0,win,GROUP_STAGE,2023-12-13
+Celtic FC,Feyenoord Rotterdam,2,1,win,GROUP_STAGE,2023-12-13
+AC Milan,Newcastle United FC,1,2,loss,GROUP_STAGE,2023-12-13
+Borussia Dortmund,Paris Saint-Germain FC,1,1,draw,GROUP_STAGE,2023-12-13
+Royal Antwerp FC,FC Barcelona,3,2,win,GROUP_STAGE,2023-12-13
+FC Porto,FK Shakhtar Donetsk,5,3,win,GROUP_STAGE,2023-12-13
+Manchester City FC,FC København,1,3,loss,LAST_16,2024-02-13
+Real Madrid CF,RB Leipzig,0,1,loss,LAST_16,2024-02-13
+Paris Saint-Germain FC,Real Sociedad de Fútbol,2,0,win,LAST_16,2024-02-14
+SS Lazio,FC Bayern München,1,0,win,LAST_16,2024-02-14
+FC Internazionale Milano,Club Atlético de Madrid,1,0,win,LAST_16,2024-02-20
+PSV,Borussia Dortmund,1,1,draw,LAST_16,2024-02-20
+FC Porto,Arsenal FC,1,0,win,LAST_16,2024-02-21
+SSC Napoli,FC Barcelona,1,1,draw,LAST_16,2024-02-21
+Paris Saint-Germain FC,Real Sociedad de Fútbol,1,2,loss,LAST_16,2024-03-05
+FC Bayern München,SS Lazio,3,0,win,LAST_16,2024-03-05
+Manchester City FC,FC København,3,1,win,LAST_16,2024-03-06
+Real Madrid CF,RB Leipzig,1,1,draw,LAST_16,2024-03-06
+Arsenal FC,FC Porto,5,2,win,LAST_16,2024-03-12
+FC Barcelona,SSC Napoli,3,1,win,LAST_16,2024-03-12
+Club Atlético de Madrid,FC Internazionale Milano,5,3,win,LAST_16,2024-03-13
+Borussia Dortmund,PSV,2,0,win,LAST_16,2024-03-13
+Arsenal FC,FC Bayern München,2,2,draw,QUARTER_FINALS,2024-04-09
+Real Madrid CF,Manchester City FC,3,3,draw,QUARTER_FINALS,2024-04-09
+Club Atlético de Madrid,Borussia Dortmund,2,1,win,QUARTER_FINALS,2024-04-10
+FC Barcelona,Paris Saint-Germain FC,2,3,loss,QUARTER_FINALS,2024-04-10
+Borussia Dortmund,Club Atlético de Madrid,4,2,win,QUARTER_FINALS,2024-04-16
+Paris Saint-Germain FC,FC Barcelona,1,4,loss,QUARTER_FINALS,2024-04-16
+FC Bayern München,Arsenal FC,1,0,win,QUARTER_FINALS,2024-04-17
+Real Madrid CF,Manchester City FC,4,5,loss,QUARTER_FINALS,2024-04-17
+FC Bayern München,Real Madrid CF,2,2,draw,SEMI_FINALS,2024-04-30
+Borussia Dortmund,Paris Saint-Germain FC,1,0,win,SEMI_FINALS,2024-05-01
+Borussia Dortmund,Paris Saint-Germain FC,0,1,loss,SEMI_FINALS,2024-05-07
+Real Madrid CF,FC Bayern München,2,1,win,SEMI_FINALS,2024-05-08
+Real Madrid CF,Borussia Dortmund,0,2,loss,FINAL,2024-06-01

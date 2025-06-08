@@ -6,7 +6,8 @@ from .views import (
     MatchListView, MatchCreateView,
     MatchUpdateView, MatchDeleteView,
     MatchListAnalystView, TeamListGuestView,
-    CustomTokenObtainPairView  # ✅ Usamos esta personalizada
+    CustomTokenObtainPairView, # ✅ Usamos esta personalizada
+    graph_data_view  
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -32,4 +33,7 @@ urlpatterns = [
     path('api/matches/<int:id>/update/', MatchUpdateView.as_view(), name='match-update'),
     path('api/matches/<int:id>/delete/', MatchDeleteView.as_view(), name='match-delete'),
     path('api/matches/analyst/', MatchListAnalystView.as_view(), name='match-list-analyst'),
+
+    #GRAFO
+    path("api/graph-data/", graph_data_view),
 ]
