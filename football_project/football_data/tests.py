@@ -1,8 +1,6 @@
 from rest_framework import serializers
 from rest_framework.permissions import BasePermission
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Team
-from .models import Match
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:

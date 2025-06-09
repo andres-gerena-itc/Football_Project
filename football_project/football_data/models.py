@@ -2,7 +2,7 @@ from django.db import models
 
 class Team(models.Model):
     name = models.CharField(max_length=255)
-    country = models.CharField(max_length=255, null=True, blank=True)
+    country = models.CharField(max_length=100, null=True, blank=True)
 
 class Match(models.Model):
     home_team = models.ForeignKey(Team, related_name='home_matches', on_delete=models.CASCADE)
@@ -10,5 +10,5 @@ class Match(models.Model):
     date = models.DateTimeField()
     home_score = models.IntegerField(null=True, blank=True)
     away_score = models.IntegerField(null=True, blank=True)
-    competition = models.CharField(max_length=100, null=False, blank=False)
-    stage = models.CharField(max_length=100, null=False, blank=False)
+    competition = models.CharField(max_length=100, null=True, blank=True)
+    stage = models.CharField(max_length=100, null=True, blank=True)
