@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import GrafoPorFase from "../components/GrafoPorFase";
+import GrafoPorFasePlotly from "../components/GrafoPorFasePlotly";
 
 
 
@@ -69,6 +69,7 @@ function MatchTabs() {
           ))}
         </tbody>
       </table>
+      <GrafoPorFasePlotly />
     </div>
     
   );

@@ -62,8 +62,6 @@ function Dashboard() {
           </div>
         </section>
 
-        <MatchTabs />
-
         <MatchGraph />
 
       </main>
@@ -72,3 +70,6 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+
+

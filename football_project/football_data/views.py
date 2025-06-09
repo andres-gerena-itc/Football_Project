@@ -12,9 +12,7 @@ import networkx as nx
 import plotly.graph_objects as go
 from django.http import JsonResponse
 import pandas as pd
-from django.views.decorators.csrf import csrf_exempt
-import os
-from django.conf import settings
+from rest_framework.decorators import api_view
 
 
 
@@ -174,36 +172,127 @@ def graph_data_view(request):
     #Segundo  grafo dirigido
 
 
-@csrf_exempt
-def directed_graph_by_stage(request):
-    csv_path = os.path.join(settings.BASE_DIR, 'matches_data.csv')
-    df = pd.read_csv(csv_path)
+@api_view(['GET'])
+def directed_graph_by_stage_plotly(request):
+    import plotly.colors as pc
 
-    # Normalizar nombre de columnas si es necesario
-    df.columns = [col.strip().lower() for col in df.columns]
-
-    # Validar columnas necesarias
-    required_cols = ['home_team', 'away_team', 'stage']
-    if not all(col in df.columns for col in required_cols):
-        return JsonResponse({'error': 'CSV must contain home_team, away_team, and stage columns'}, status=400)
+    df = pd.read_csv('matches_data.csv')
 
     G = nx.DiGraph()
 
-    # Crear nodos únicos
-    teams = set(df['home_team']).union(set(df['away_team']))
-    for team in teams:
-        G.add_node(team)
-
-    # Crear aristas dirigidas por fase
     for _, row in df.iterrows():
-        source = row['home_team']
-        target = row['away_team']
+        home = row['source_team']
+        away = row['target_team']
         stage = row['stage']
-        G.add_edge(source, target, stage=stage)
 
-    # Convertir a formato JSON
-    nodes = [{'id': node} for node in G.nodes()]
-    links = [{'source': u, 'target': v, 'stage': d['stage']} for u, v, d in G.edges(data=True)]
+        G.add_node(home)
+        G.add_node(away)
+        G.add_edge(home, away, stage=stage)
 
-    return JsonResponse({'nodes': nodes, 'links': links})
+    pos = nx.spring_layout(G, seed=42)
+
+    # Paleta de colores para fases
+    unique_stages = sorted(df['stage'].unique())
+    color_palette = pc.qualitative.Plotly
+    stage_colors = {stage: color_palette[i % len(color_palette)] for i, stage in enumerate(unique_stages)}
+
+    # Una traza por cada fase
+    edge_traces = []
+    for stage in unique_stages:
+        edge_x = []
+        edge_y = []
+        hover_texts = []
+
+        for u, v, d in G.edges(data=True):
+            if d['stage'] == stage:
+                x0, y0 = pos[u]
+                x1, y1 = pos[v]
+                edge_x += [x0, x1, None]
+                edge_y += [y0, y1, None]
+                hover_texts.append(f"{u} → {v} ({stage})")
+
+        edge_trace = go.Scatter(
+            x=edge_x,
+            y=edge_y,
+            line=dict(width=1.5, color=stage_colors[stage]),
+            hoverinfo='text',
+            text=hover_texts,
+            mode='lines',
+            name=stage
+        )
+        edge_traces.append(edge_trace)
+
+    # Nodos
+    node_x = []
+    node_y = []
+    node_text = []
+
+    for node in G.nodes():
+        x, y = pos[node]
+        node_x.append(x)
+        node_y.append(y)
+        node_text.append(node)
+
+    node_trace = go.Scatter(
+        x=node_x, y=node_y,
+        mode='markers+text',
+        hoverinfo='text',
+        marker=dict(
+            showscale=False,
+            color='blue',
+            size=10,
+            line_width=2),
+        text=node_text
+    )
+
+    fig = go.Figure(
+        data=edge_traces + [node_trace],
+        layout=go.Layout(
+            title=dict(
+                text='Grafo Dirigido por Fase (Plotly)',
+                font=dict(size=18)
+            ),
+            showlegend=True,
+            hovermode='closest',
+            margin=dict(b=20, l=5, r=5, t=40),
+            xaxis=dict(showgrid=False, zeroline=False),
+            yaxis=dict(showgrid=False, zeroline=False)
+        )
+    )
+
+    return JsonResponse(fig.to_plotly_json())
+
+
+
+#MUESTRA GRAFICO DE GOLES EN DASHBOARD
+
+@api_view(['GET'])
+def total_goals_per_team_bar(request):
+    import plotly.express as px
+
+    df = pd.read_csv('matches_data.csv')
+
+    # Goles como local
+    goles_local = df.groupby('source_team')['goles_local'].sum()
+
+    # Goles como visitante
+    goles_visita = df.groupby('target_team')['goles_visita'].sum()
+
+    # Combinar y sumar
+    goles_totales = goles_local.add(goles_visita, fill_value=0).sort_values(ascending=False)
+
+    # Crear DataFrame para graficar
+    df_plot = goles_totales.reset_index()
+    df_plot.columns = ['Equipo', 'Goles']
+
+    fig = px.bar(df_plot,
+                 x='Equipo',
+                 y='Goles',
+                 title='Goles totales por equipo en el torneo',
+                 labels={'Goles': 'Número de Goles', 'Equipo': 'Equipo'},
+                 template='simple_white')
+
+    fig.update_layout(xaxis_tickangle=-45)
+
+    return JsonResponse(fig.to_plotly_json())
 
