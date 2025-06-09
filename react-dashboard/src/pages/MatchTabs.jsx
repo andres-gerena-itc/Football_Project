@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import GrafoPorFase from "../components/GrafoPorFase";
+
+
 
 function MatchTabs() {
   const [matches, setMatches] = useState([]);
@@ -67,6 +70,7 @@ function MatchTabs() {
         </tbody>
       </table>
     </div>
+    
   );
 }
 
