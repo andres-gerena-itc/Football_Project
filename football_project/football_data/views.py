@@ -269,19 +269,17 @@ def directed_graph_by_stage_plotly(request):
 @api_view(['GET'])
 def total_goals_per_team_bar(request):
     import plotly.express as px
+    import json
+    from plotly.utils import PlotlyJSONEncoder
+    from django.http import HttpResponse
 
     df = pd.read_csv('matches_data.csv')
 
-    # Goles como local
     goles_local = df.groupby('source_team')['goles_local'].sum()
-
-    # Goles como visitante
     goles_visita = df.groupby('target_team')['goles_visita'].sum()
 
-    # Combinar y sumar
     goles_totales = goles_local.add(goles_visita, fill_value=0).sort_values(ascending=False)
 
-    # Crear DataFrame para graficar
     df_plot = goles_totales.reset_index()
     df_plot.columns = ['Equipo', 'Goles']
 
@@ -294,5 +292,5 @@ def total_goals_per_team_bar(request):
 
     fig.update_layout(xaxis_tickangle=-45)
 
-    return JsonResponse(fig.to_plotly_json())
+    return HttpResponse(json.dumps(fig, cls=PlotlyJSONEncoder), content_type='application/json')
 

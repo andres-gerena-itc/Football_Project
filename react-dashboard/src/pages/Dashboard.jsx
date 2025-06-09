@@ -1,9 +1,10 @@
 import Header from "../components/Header";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import regresionImage from '../assets/regresion.png'; // 🔽 importa tu imagen
+import regresionImage from '../assets/regresion.png';
 import MatchTabs from "./MatchTabs";
 import MatchGraph from "../components/MatchGraph";
+import TotalGoalsBarChart from '../components/TotalGoalsBarChart';
 
 function Dashboard() {
   const [kpis, setKpis] = useState(null);
@@ -34,12 +35,31 @@ function Dashboard() {
           <h2>Promedio Goles por Partido: {kpis.avg_goals_per_match}</h2>
         </div>
 
-        {/* 🔍 NUEVA SECCIÓN DE REGRESIÓN */}
+        {/* 📈 Gráfico de goles por equipo con scroll horizontal y espaciado correcto */}
+        <section style={{ marginTop: '4rem', marginBottom: '6rem' }}>
+          <h2>⚽ Goles Totales por Equipo</h2>
+          <p>Esta gráfica muestra cuántos goles anotó cada equipo en toda la competencia, sumando los goles de local y visitante.</p>
+          <div style={{
+            marginTop: '2rem',
+            padding: '1rem',
+            overflowX: 'auto',
+            border: '1px solid #ccc',
+            borderRadius: '8px',
+            background: '#fff',
+            minHeight: '500px'
+          }}>
+            <div style={{ minWidth: '1000px' }}>
+              <TotalGoalsBarChart />
+            </div>
+          </div>
+        </section>
+
+        {/* 🔍 Sección de regresión */}
         <section style={{
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
-          marginTop: '3rem',
+          marginTop: '5rem',
           gap: '2rem'
         }}>
           <div style={{ flex: 1 }}>
@@ -62,14 +82,11 @@ function Dashboard() {
           </div>
         </section>
 
+        {/* 📊 Gráfico adicional del grafo o evolución de partidos */}
         <MatchGraph />
-
       </main>
     </div>
   );
 }
 
 export default Dashboard;
-
-
-
