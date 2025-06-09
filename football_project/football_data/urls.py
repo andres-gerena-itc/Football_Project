@@ -7,7 +7,7 @@ from .views import (
     MatchUpdateView, MatchDeleteView,
     MatchListAnalystView, TeamListGuestView,
     CustomTokenObtainPairView, # ✅ Usamos esta personalizada
-    graph_data_view  
+    graph_data_view, directed_graph_by_stage
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -36,4 +36,5 @@ urlpatterns = [
 
     #GRAFO
     path("api/graph-data/", graph_data_view),
+    path('api/graph/by-stage/', directed_graph_by_stage, name='directed_graph_by_stage'),
 ]

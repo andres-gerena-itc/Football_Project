@@ -11,6 +11,10 @@ from .permissions import IsAdminUser, IsAnalystUser, IsGuestUser
 import networkx as nx
 import plotly.graph_objects as go
 from django.http import JsonResponse
+import pandas as pd
+from django.views.decorators.csrf import csrf_exempt
+import os
+from django.conf import settings
 
 
 
@@ -164,3 +168,42 @@ def graph_data_view(request):
     )
 
     return JsonResponse({"data": [edge_trace, node_trace], "layout": layout})
+
+
+
+    #Segundo  grafo dirigido
+
+
+@csrf_exempt
+def directed_graph_by_stage(request):
+    csv_path = os.path.join(settings.BASE_DIR, 'matches_data.csv')
+    df = pd.read_csv(csv_path)
+
+    # Normalizar nombre de columnas si es necesario
+    df.columns = [col.strip().lower() for col in df.columns]
+
+    # Validar columnas necesarias
+    required_cols = ['home_team', 'away_team', 'stage']
+    if not all(col in df.columns for col in required_cols):
+        return JsonResponse({'error': 'CSV must contain home_team, away_team, and stage columns'}, status=400)
+
+    G = nx.DiGraph()
+
+    # Crear nodos únicos
+    teams = set(df['home_team']).union(set(df['away_team']))
+    for team in teams:
+        G.add_node(team)
+
+    # Crear aristas dirigidas por fase
+    for _, row in df.iterrows():
+        source = row['home_team']
+        target = row['away_team']
+        stage = row['stage']
+        G.add_edge(source, target, stage=stage)
+
+    # Convertir a formato JSON
+    nodes = [{'id': node} for node in G.nodes()]
+    links = [{'source': u, 'target': v, 'stage': d['stage']} for u, v, d in G.edges(data=True)]
+
+    return JsonResponse({'nodes': nodes, 'links': links})
+
