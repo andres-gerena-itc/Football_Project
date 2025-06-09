@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import GrafoPorFasePlotly from "../components/GrafoPorFasePlotly";
+import Header from "../components/Header"; // 👈 Importamos Header
 
 function MatchTabs() {
   const [matches, setMatches] = useState([]);
@@ -22,50 +24,58 @@ function MatchTabs() {
   const filteredMatches = matches.filter((match) => match.stage === selectedStage);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Partidos por Fase</h2>
+    <div>
+      <Header /> {/* 👈 Agregamos el Header */}
 
-      <div style={{ margin: "1rem 0", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-        {stages.map((stage) => (
-          <button
-            key={stage}
-            onClick={() => setSelectedStage(stage)}
-            style={{
-              padding: "0.5rem 1rem",
-              backgroundColor: selectedStage === stage ? "#007BFF" : "#ddd",
-              color: selectedStage === stage ? "#fff" : "#000",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer"
-            }}
-          >
-            {stage.replace("_", " ")}
-          </button>
-        ))}
-      </div>
+      <main style={{ padding: "6rem 2rem 2rem" }}> {/* 👈 Alineamos visualmente */}
+        <h2>Partidos por Fase</h2>
 
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th style={cellStyle}>Fecha</th>
-            <th style={cellStyle}>Equipo Local</th>
-            <th style={cellStyle}>Goles Local</th>
-            <th style={cellStyle}>Goles Visitante</th>
-            <th style={cellStyle}>Equipo Visitante</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredMatches.map((match) => (
-            <tr key={match.id}>
-              <td style={cellStyle}>{new Date(match.date).toLocaleString()}</td>
-              <td style={cellStyle}>{match.home_team_name || match.home_team}</td>
-              <td style={cellStyle}>{match.home_score}</td>
-              <td style={cellStyle}>{match.away_score}</td>
-              <td style={cellStyle}>{match.away_team_name || match.away_team}</td>
-            </tr>
+        <div style={{ margin: "1rem 0", display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          {stages.map((stage) => (
+            <button
+              key={stage}
+              onClick={() => setSelectedStage(stage)}
+              style={{
+                padding: "0.5rem 1rem",
+                backgroundColor: selectedStage === stage ? "#007BFF" : "#ddd",
+                color: selectedStage === stage ? "#fff" : "#000",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer"
+              }}
+            >
+              {stage.replace("_", " ")}
+            </button>
           ))}
-        </tbody>
-      </table>
+        </div>
+
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={cellStyle}>Fecha</th>
+              <th style={cellStyle}>Equipo Local</th>
+              <th style={cellStyle}>Goles Local</th>
+              <th style={cellStyle}>Goles Visitante</th>
+              <th style={cellStyle}>Equipo Visitante</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredMatches.map((match) => (
+              <tr key={match.id}>
+                <td style={cellStyle}>{new Date(match.date).toLocaleString()}</td>
+                <td style={cellStyle}>{match.home_team_name || match.home_team}</td>
+                <td style={cellStyle}>{match.home_score}</td>
+                <td style={cellStyle}>{match.away_score}</td>
+                <td style={cellStyle}>{match.away_team_name || match.away_team}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div style={{ marginTop: "3rem" }}>
+          <GrafoPorFasePlotly />
+        </div>
+      </main>
     </div>
   );
 }

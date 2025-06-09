@@ -11,6 +11,10 @@ from .permissions import IsAdminUser, IsAnalystUser, IsGuestUser
 import networkx as nx
 import plotly.graph_objects as go
 from django.http import JsonResponse
+import pandas as pd
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 
 
 
@@ -164,3 +168,190 @@ def graph_data_view(request):
     )
 
     return JsonResponse({"data": [edge_trace, node_trace], "layout": layout})
+
+
+
+    #Segundo  grafo dirigido
+
+
+@api_view(['GET'])
+def directed_graph_by_stage_plotly(request):
+    import plotly.colors as pc
+
+    df = pd.read_csv('matches_data.csv')
+
+    G = nx.DiGraph()
+
+    for _, row in df.iterrows():
+        home = row['source_team']
+        away = row['target_team']
+        stage = row['stage']
+
+        G.add_node(home)
+        G.add_node(away)
+        G.add_edge(home, away, stage=stage)
+
+    pos = nx.spring_layout(G, seed=42)
+
+    # Paleta de colores para fases
+    unique_stages = sorted(df['stage'].unique())
+    color_palette = pc.qualitative.Plotly
+    stage_colors = {stage: color_palette[i % len(color_palette)] for i, stage in enumerate(unique_stages)}
+
+    # Una traza por cada fase
+    edge_traces = []
+    for stage in unique_stages:
+        edge_x = []
+        edge_y = []
+        hover_texts = []
+
+        for u, v, d in G.edges(data=True):
+            if d['stage'] == stage:
+                x0, y0 = pos[u]
+                x1, y1 = pos[v]
+                edge_x += [x0, x1, None]
+                edge_y += [y0, y1, None]
+                hover_texts.append(f"{u} → {v} ({stage})")
+
+        edge_trace = go.Scatter(
+            x=edge_x,
+            y=edge_y,
+            line=dict(width=1.5, color=stage_colors[stage]),
+            hoverinfo='text',
+            text=hover_texts,
+            mode='lines',
+            name=stage
+        )
+        edge_traces.append(edge_trace)
+
+    # Nodos
+    node_x = []
+    node_y = []
+    node_text = []
+
+    for node in G.nodes():
+        x, y = pos[node]
+        node_x.append(x)
+        node_y.append(y)
+        node_text.append(node)
+
+    node_trace = go.Scatter(
+        x=node_x, y=node_y,
+        mode='markers+text',
+        hoverinfo='text',
+        marker=dict(
+            showscale=False,
+            color='blue',
+            size=10,
+            line_width=2),
+        text=node_text
+    )
+
+    fig = go.Figure(
+        data=edge_traces + [node_trace],
+        layout=go.Layout(
+            title=dict(
+                text='Grafo Dirigido por Fase (Plotly)',
+                font=dict(size=18)
+            ),
+            showlegend=True,
+            hovermode='closest',
+            margin=dict(b=20, l=5, r=5, t=40),
+            xaxis=dict(showgrid=False, zeroline=False),
+            yaxis=dict(showgrid=False, zeroline=False)
+        )
+    )
+
+    return JsonResponse(fig.to_plotly_json())
+
+
+
+#MUESTRA GRAFICO DE GOLES EN DASHBOARD
+
+@api_view(['GET'])
+def total_goals_per_team_bar(request):
+    import plotly.express as px
+    import json
+    from plotly.utils import PlotlyJSONEncoder
+    from django.http import HttpResponse
+
+    df = pd.read_csv('matches_data.csv')
+
+    goles_local = df.groupby('source_team')['goles_local'].sum()
+    goles_visita = df.groupby('target_team')['goles_visita'].sum()
+
+    goles_totales = goles_local.add(goles_visita, fill_value=0).sort_values(ascending=False)
+
+    df_plot = goles_totales.reset_index()
+    df_plot.columns = ['Equipo', 'Goles']
+
+    fig = px.bar(df_plot,
+                 x='Equipo',
+                 y='Goles',
+                 title='Goles totales por equipo en el torneo',
+                 labels={'Goles': 'Número de Goles', 'Equipo': 'Equipo'},
+                 template='simple_white')
+
+    fig.update_layout(xaxis_tickangle=-45)
+
+    return HttpResponse(json.dumps(fig, cls=PlotlyJSONEncoder), content_type='application/json')
+
+
+
+#GRAFICA EN PAGINA TEAMS/EQUIPOS
+
+@api_view(['GET'])
+def team_kpis(request):
+    df = pd.read_csv('matches_data.csv')
+
+    teams = sorted(set(df['source_team']).union(df['target_team']))
+    response = []
+
+    for team in teams:
+        partidos_jugados = df[(df['source_team'] == team) | (df['target_team'] == team)].shape[0]
+        goles_a_favor = df[df['source_team'] == team]['goles_local'].sum() + df[df['target_team'] == team]['goles_visita'].sum()
+        goles_en_contra = df[df['source_team'] == team]['goles_visita'].sum() + df[df['target_team'] == team]['goles_local'].sum()
+        diferencia = goles_a_favor - goles_en_contra
+
+        response.append({
+            "equipo": team,
+            "partidos": partidos_jugados,
+            "goles_a_favor": goles_a_favor,
+            "goles_en_contra": goles_en_contra,
+            "diferencia": diferencia
+        })
+
+    return Response(response)
+
+#GRAFICA 2 PAGINA TEAMS
+
+@api_view(['GET'])
+def goals_over_time(request):
+    team = request.GET.get('team')
+    if not team:
+        return Response({"error": "No se especificó el equipo."}, status=400)
+
+    df = pd.read_csv('matches_data.csv')
+    df['fecha'] = pd.to_datetime(df['fecha'])
+
+    # Filtrar partidos donde el equipo participó
+    team_matches = df[(df['source_team'] == team) | (df['target_team'] == team)].copy()
+    team_matches.sort_values('fecha', inplace=True)
+
+    data = []
+    for _, row in team_matches.iterrows():
+        if row['source_team'] == team:
+            goles_anotados = row['goles_local']
+            rival = row['target_team']
+        else:
+            goles_anotados = row['goles_visita']
+            rival = row['source_team']
+
+        data.append({
+            "fecha": row['fecha'].strftime('%Y-%m-%d'),
+            "goles": goles_anotados,
+            "rival": rival,
+            "resultado": f"{row['goles_local']} - {row['goles_visita']}"
+        })
+
+    return Response(data)
