@@ -7,7 +7,7 @@ def kpi_summary(request):
     matches = Match.objects.all()
     total_matches = matches.count()
     total_goals = sum([m.home_score + m.away_score for m in matches])
-    avg_goals = round(total_goals / total_matches, 2) if total_matches > 0 else 0
+    avg_goals = round(total_goals / total_matches, 2) if total_matches >= 0 else 0
 
     data = {
         'total_matches': total_matches,

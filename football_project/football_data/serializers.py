@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Team
-from .models import Match
+from .models import Team, Match
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
