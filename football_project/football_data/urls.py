@@ -8,7 +8,8 @@ from .views import (
     MatchListAnalystView, TeamListGuestView,
     CustomTokenObtainPairView, # ✅ Usamos esta personalizada
     graph_data_view, directed_graph_by_stage_plotly,
-    total_goals_per_team_bar
+    total_goals_per_team_bar,
+    team_kpis
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -41,4 +42,5 @@ urlpatterns = [
 
     #GRAFICAS
     path('api/goals/total-bar/', total_goals_per_team_bar),
+    path('api/teams/kpis/', team_kpis),
 ]

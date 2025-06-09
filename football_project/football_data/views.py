@@ -13,6 +13,8 @@ import plotly.graph_objects as go
 from django.http import JsonResponse
 import pandas as pd
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 
 
 
@@ -294,3 +296,29 @@ def total_goals_per_team_bar(request):
 
     return HttpResponse(json.dumps(fig, cls=PlotlyJSONEncoder), content_type='application/json')
 
+
+
+#GRAFICA EN PAGINA TEAMS/EQUIPOS
+
+@api_view(['GET'])
+def team_kpis(request):
+    df = pd.read_csv('matches_data.csv')
+
+    teams = sorted(set(df['source_team']).union(df['target_team']))
+    response = []
+
+    for team in teams:
+        partidos_jugados = df[(df['source_team'] == team) | (df['target_team'] == team)].shape[0]
+        goles_a_favor = df[df['source_team'] == team]['goles_local'].sum() + df[df['target_team'] == team]['goles_visita'].sum()
+        goles_en_contra = df[df['source_team'] == team]['goles_visita'].sum() + df[df['target_team'] == team]['goles_local'].sum()
+        diferencia = goles_a_favor - goles_en_contra
+
+        response.append({
+            "equipo": team,
+            "partidos": partidos_jugados,
+            "goles_a_favor": goles_a_favor,
+            "goles_en_contra": goles_en_contra,
+            "diferencia": diferencia
+        })
+
+    return Response(response)

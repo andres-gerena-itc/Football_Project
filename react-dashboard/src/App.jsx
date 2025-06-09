@@ -35,7 +35,7 @@ function App() {
 
       {/* Nueva ruta con pestañas para partidos por fase */}
       <Route path="/match-tabs" element={
-        <ProtectedRoute allowedRoles={["admin", "analista", "invitado"]}>
+        <ProtectedRoute allowedRoles={["admin", "analista"]}>
           <MatchTabs />
         </ProtectedRoute>
       }/>
