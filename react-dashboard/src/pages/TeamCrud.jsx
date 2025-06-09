@@ -5,12 +5,34 @@ import Header from "../components/Header";
 
 function TeamCrud() {
   const [role, setRole] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
+
+    if (!token) {
+      console.warn("No access_token found in localStorage");
+      setRole("invitado");
+      setLoading(false);
+      return;
+    }
+
     const userRole = getMainUserRole(token);
-    setRole(userRole);
+    console.log("Rol detectado:", userRole);
+    setRole(userRole || "invitado");
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return (
+      <div>
+        <Header />
+        <main style={{ padding: "6rem 2rem" }}>
+          <p>Cargando perfil de usuario...</p>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -46,12 +68,10 @@ function TeamCrud() {
           </section>
         )}
 
-        {role && (
-          <section style={{ marginTop: "4rem" }}>
-            <h2>📊 KPIs por Equipo</h2>
-            <TeamSelectorKPIs />
-          </section>
-        )}
+        <section style={{ marginTop: "4rem" }}>
+          <h2>📊 KPIs por Equipo</h2>
+          <TeamSelectorKPIs />
+        </section>
 
         {role === "invitado" && (
           <p style={{ marginTop: "2rem", color: "#888" }}>

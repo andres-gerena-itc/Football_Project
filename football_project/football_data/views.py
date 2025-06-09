@@ -322,3 +322,36 @@ def team_kpis(request):
         })
 
     return Response(response)
+
+#GRAFICA 2 PAGINA TEAMS
+
+@api_view(['GET'])
+def goals_over_time(request):
+    team = request.GET.get('team')
+    if not team:
+        return Response({"error": "No se especificó el equipo."}, status=400)
+
+    df = pd.read_csv('matches_data.csv')
+    df['fecha'] = pd.to_datetime(df['fecha'])
+
+    # Filtrar partidos donde el equipo participó
+    team_matches = df[(df['source_team'] == team) | (df['target_team'] == team)].copy()
+    team_matches.sort_values('fecha', inplace=True)
+
+    data = []
+    for _, row in team_matches.iterrows():
+        if row['source_team'] == team:
+            goles_anotados = row['goles_local']
+            rival = row['target_team']
+        else:
+            goles_anotados = row['goles_visita']
+            rival = row['source_team']
+
+        data.append({
+            "fecha": row['fecha'].strftime('%Y-%m-%d'),
+            "goles": goles_anotados,
+            "rival": rival,
+            "resultado": f"{row['goles_local']} - {row['goles_visita']}"
+        })
+
+    return Response(data)
