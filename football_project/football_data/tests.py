@@ -14,7 +14,3 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
         data["groups"] = [group.name for group in self.user.groups.all()]
         return data
-    
-class IsGuestUser(BasePermission):
-    def has_permission(self, request, view):
-        return request.user and request.user.groups.filter(name='invitado').exists()

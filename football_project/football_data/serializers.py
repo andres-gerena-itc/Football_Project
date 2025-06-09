@@ -8,7 +8,6 @@ class TeamSerializer(serializers.ModelSerializer):
         model = Team
         fields = ['id', 'name']
 
-
 class MatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
@@ -16,7 +15,6 @@ class MatchSerializer(serializers.ModelSerializer):
             'id', 'date', 'home_team', 'away_team',
             'home_score', 'away_score', 'competition', 'stage'
         ]
-
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):

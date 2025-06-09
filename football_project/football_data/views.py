@@ -9,8 +9,6 @@ from .models import Match
 from .serializers import TeamSerializer,  MatchSerializer, CustomTokenObtainPairSerializer
 from .permissions import IsAdminUser, IsAnalystUser, IsGuestUser
 
-
-
 # Lista todos los equipos
 class TeamListView(generics.ListAPIView):
     queryset = Team.objects.all()
@@ -36,9 +34,6 @@ class TeamDeleteView(generics.DestroyAPIView):
     serializer_class = TeamSerializer
     permission_classes = [permissions.IsAuthenticated, IsAdminUser]
     lookup_field = 'id'
-
-
-
 
 # Listar todos los partidos
 class MatchListView(generics.ListAPIView):
@@ -66,10 +61,7 @@ class MatchDeleteView(generics.DestroyAPIView):
     permission_classes = [permissions.IsAuthenticated, IsAdminUser]
     lookup_field = 'id'
 
-
-
 #Restriccion para que analistas puedan ver el los partidos
-
 class MatchListAnalystView(generics.ListAPIView):
     queryset = Match.objects.all()
     serializer_class = MatchSerializer
@@ -77,14 +69,11 @@ class MatchListAnalystView(generics.ListAPIView):
 
 
 #Invitado que vea solo los equipos
-
 class TeamListGuestView(generics.ListAPIView):
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
     permission_classes = [permissions.IsAuthenticated, IsGuestUser]
 
-
 #VISTA PERSONALIZADA ACCESO LOGIN
-
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
