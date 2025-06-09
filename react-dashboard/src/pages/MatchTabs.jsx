@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import GrafoPorFasePlotly from "../components/GrafoPorFasePlotly";
 import Header from "../components/Header"; // 👈 Importamos Header
+import { API_URL } from '../config';
 
 function MatchTabs() {
   const [matches, setMatches] = useState([]);
   const [selectedStage, setSelectedStage] = useState("GROUP_STAGE");
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/matches/")
+    fetch(`${API_URL}/api/matches/`)
       .then((res) => res.json())
       .then((data) => setMatches(data))
       .catch((err) => console.error("Error al cargar partidos:", err));

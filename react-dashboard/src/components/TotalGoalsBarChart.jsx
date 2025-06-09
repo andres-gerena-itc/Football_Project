@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
+import { API_URL } from '../config';
 
 function TotalGoalsBarChart() {
   const [data, setData] = useState(null);
@@ -7,7 +8,7 @@ function TotalGoalsBarChart() {
   const [config, setConfig] = useState({ responsive: true });
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/goals/total-bar/')
+    fetch(`${API_URL}/api/goals/total-bar/`)
       .then(res => res.json())
       .then(fig => {
         setData(fig.data);

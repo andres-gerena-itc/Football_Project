@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
+import { API_URL } from '../config';
 
 function MatchGraph() {
   const [graphData, setGraphData] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/graph-data/") // Asegúrate de tener esta ruta en Django
+    fetch(`${API_URL}/api/graph-data/`) // Asegúrate de tener esta ruta en Django
       .then((res) => res.json())
       .then((data) => setGraphData(data))
       .catch((err) => console.error("Error cargando grafo:", err));

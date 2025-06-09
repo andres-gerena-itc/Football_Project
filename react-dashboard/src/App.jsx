@@ -21,21 +21,21 @@ function App() {
 
       {/* Gestión de Equipos: solo Admin y Analista */}
       <Route path="/teams" element={
-        <ProtectedRoute allowedRoles={["admin", "analista"]}>
+        <ProtectedRoute allowedRoles={["admin"]}>
           <TeamCrud />
         </ProtectedRoute>
       }/>
 
       {/* Gestión de Partidos: solo Admin y Analista */}
       <Route path="/matches" element={
-        <ProtectedRoute allowedRoles={["admin", "analista"]}>
+        <ProtectedRoute allowedRoles={["admin"]}>
           <MatchCrud />
         </ProtectedRoute>
       }/>
 
       {/* Nueva ruta con pestañas para partidos por fase */}
       <Route path="/match-tabs" element={
-        <ProtectedRoute allowedRoles={["admin"]}>
+        <ProtectedRoute allowedRoles={["admin", "analista"]}>
           <MatchTabs />
         </ProtectedRoute>
       }/>
