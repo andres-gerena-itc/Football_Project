@@ -1,4 +1,3 @@
-// src/components/Header.jsx
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
 
@@ -21,7 +20,7 @@ export default function Header() {
       <nav className="nav-links">
         <button onClick={() => navigate("/dashboard")}>Dashboard</button>
 
-        {(role === "admin" || role === "analista") && (
+        {role === "admin" && (
           <button onClick={() => navigate("/teams")}>Equipos</button>
         )}
 

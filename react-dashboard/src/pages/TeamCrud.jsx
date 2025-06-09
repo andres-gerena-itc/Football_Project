@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMainUserRole } from "../utils/auth";
 import TeamSelectorKPIs from "../components/TeamSelectorKPIs";
+import TeamGoalsOverTime from "../components/TeamGoalsOverTime";
 import Header from "../components/Header";
 
 function TeamCrud() {
@@ -69,7 +70,6 @@ function TeamCrud() {
         )}
 
         <section style={{ marginTop: "4rem" }}>
-          <h2>📊 KPIs por Equipo</h2>
           <TeamSelectorKPIs />
         </section>
 
@@ -79,6 +79,7 @@ function TeamCrud() {
           </p>
         )}
       </main>
+
     </div>
   );
 }
