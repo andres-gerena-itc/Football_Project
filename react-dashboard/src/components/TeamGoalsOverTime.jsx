@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
+import { API_URL } from '../config';
 
 function TeamGoalsOverTime({ team }) {
   const [data, setData] = useState([]);
@@ -7,7 +8,7 @@ function TeamGoalsOverTime({ team }) {
   useEffect(() => {
     if (!team) return;
 
-    fetch(`http://localhost:8000/api/teams/goals-over-time/?team=${encodeURIComponent(team)}`)
+    fetch(`${API_URL}/api/teams/goals-over-time/?team=${encodeURIComponent(team)}`)
       .then(res => res.json())
       .then(setData)
       .catch(err => console.error("Error al cargar goles por partido:", err));

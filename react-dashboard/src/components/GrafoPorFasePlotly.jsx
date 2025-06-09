@@ -1,11 +1,12 @@
 import Plot from 'react-plotly.js';
 import { useEffect, useState } from 'react';
+import { API_URL } from '../config';
 
 function GrafoPorFasePlotly() {
   const [figData, setFigData] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/graph/by-stage/plotly/")
+    fetch(`${API_URL}/api/graph/by-stage/plotly/`)
       .then(res => res.json())
       .then(data => setFigData(data))
       .catch(err => console.error("Error cargando el grafo:", err));

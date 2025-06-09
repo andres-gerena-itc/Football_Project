@@ -5,6 +5,7 @@ import regresionImage from '../assets/regresion.png';
 import MatchTabs from "./MatchTabs";
 import MatchGraph from "../components/MatchGraph";
 import TotalGoalsBarChart from '../components/TotalGoalsBarChart';
+import { API_URL } from '../config';
 
 function Dashboard() {
   const [kpis, setKpis] = useState(null);
@@ -12,11 +13,11 @@ function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/kpis/')
+    fetch(`${API_URL}/api/kpis/`)
       .then(response => response.json())
       .then(data => setKpis(data));
 
-    fetch('http://localhost:8000/api/matches/')
+    fetch(`${API_URL}/api/matches/`)
       .then(response => response.json())
       .then(data => setMatches(data));
   }, []);

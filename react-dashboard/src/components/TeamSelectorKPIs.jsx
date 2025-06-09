@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TeamGoalsOverTime from './TeamGoalsOverTime'; // Asegúrate que esta ruta sea correcta
+import { API_URL } from '../config';
 
 function TeamSelectorKPIs() {
   const [teams, setTeams] = useState([]);
@@ -7,7 +8,7 @@ function TeamSelectorKPIs() {
   const [kpi, setKpi] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/teams/kpis/')
+    fetch(`${API_URL}/api/teams/kpis/`)
       .then(res => res.json())
       .then(data => {
         setTeams(data);

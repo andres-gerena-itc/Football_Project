@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import "./Login.css";
+import { API_URL } from '../config';
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -13,7 +14,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/token/", {
+      const response = await fetch(`${API_URL}/api/token/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
